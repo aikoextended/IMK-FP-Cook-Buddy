@@ -37,7 +37,8 @@ fun landing(){
         Image(
             painter = painterResource(id = R.drawable.logofix),
             contentDescription = "Logo",
-            modifier = Modifier.size(200.dp))
+            modifier = Modifier.size(200.dp)
+        )
         Spacer(
             modifier = Modifier.height(25.dp)
         )
