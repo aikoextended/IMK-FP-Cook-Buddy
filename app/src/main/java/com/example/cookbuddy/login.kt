@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -30,7 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,7 +66,7 @@ fun login(){
             Image(
                 painter = painterResource(id = R.drawable.back_final),
                 contentDescription = "Back",
-                modifier = Modifier.size(24.dp).width(350.dp)
+                modifier = Modifier.size(24.dp).width(350.dp).clickable {  }
             )
             Spacer(
                 modifier = Modifier.height(20.dp)
@@ -98,12 +101,16 @@ fun login(){
                     modifier = Modifier.size(20.dp)
                 )
             },
-            label = {
+            placeholder = {
                 Text(
                     text = "Username",
                     color = Color.Black.copy(alpha = 0.5f)
                 )
             },
+            textStyle = TextStyle(
+                color = Color.Black.copy(alpha = 0.5f),
+                fontSize = 16.sp
+            ),
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.width(350.dp),
             colors = TextFieldDefaults.colors(
@@ -128,12 +135,17 @@ fun login(){
                     modifier = Modifier.size(20.dp)
                 )
             },
-            label = {
+            placeholder = {
                 Text(
                     text = "Password",
                     color = Color.Black.copy(alpha = 0.5f)
                 )
             },
+            textStyle = TextStyle(
+                color = Color.Black.copy(alpha = 0.5f),
+                fontSize = 18.sp
+            ),
+            visualTransformation = PasswordVisualTransformation(),
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.width(350.dp),
             colors = TextFieldDefaults.colors(
@@ -179,4 +191,9 @@ fun login(){
             )
         }
     }
+    Text(
+        text = "Forgot password?",
+        color = Color(0xFF4F070D),
+        modifier = Modifier.offset(x = 265.dp, y = 530.dp).clickable {  }
+    )
 }

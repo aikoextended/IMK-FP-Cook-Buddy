@@ -98,7 +98,7 @@ fun landing(){
             Text(
                 text = "Log in!",
                 color = Color.White,
-                modifier = Modifier.clickable {  },
+                modifier = Modifier.clickable { },
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )

@@ -30,7 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -70,7 +72,7 @@ fun register(){
             Image(
                 painter = painterResource(id = R.drawable.back_final),
                 contentDescription = "Back",
-                modifier = Modifier.size(24.dp).width(350.dp)
+                modifier = Modifier.size(24.dp).width(350.dp).clickable {  }
             )
             Spacer(
                 modifier = Modifier.height(20.dp)
@@ -105,12 +107,16 @@ fun register(){
                     modifier = Modifier.size(20.dp)
                 )
             },
-            label = {
+            placeholder = {
                 Text(
                     text = "Username",
                     color = Color.Black.copy(alpha = 0.5f)
                 )
             },
+            textStyle = TextStyle(
+                color = Color.Black.copy(alpha = 0.5f),
+                fontSize = 16.sp
+            ),
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.width(350.dp),
             colors = TextFieldDefaults.colors(
@@ -135,12 +141,16 @@ fun register(){
                     modifier = Modifier.size(20.dp)
                 )
             },
-            label = {
+            placeholder = {
                 Text(
                     text = "E-mail",
                     color = Color.Black.copy(alpha = 0.5f)
                 )
             },
+            textStyle = TextStyle(
+                color = Color.Black.copy(alpha = 0.5f),
+                fontSize = 16.sp
+            ),
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.width(350.dp),
             colors = TextFieldDefaults.colors(
@@ -164,12 +174,17 @@ fun register(){
                     modifier = Modifier.size(20.dp)
                 )
             },
-            label = {
+            placeholder = {
                 Text(
                     text = "Password",
                     color = Color.Black.copy(alpha = 0.5f)
                 )
             },
+            textStyle = TextStyle(
+                color = Color.Black.copy(alpha = 0.5f),
+                fontSize = 18.sp
+            ),
+            visualTransformation = PasswordVisualTransformation(),
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.width(350.dp),
             colors = TextFieldDefaults.colors(
@@ -193,12 +208,17 @@ fun register(){
                     modifier = Modifier.size(20.dp)
                 )
             },
-            label = {
+            placeholder = {
                 Text(
-                    text = "Re-enter Password",
+                    text = "Re-enter password",
                     color = Color.Black.copy(alpha = 0.5f)
                 )
             },
+            textStyle = TextStyle(
+                color = Color.Black.copy(alpha = 0.5f),
+                fontSize = 18.sp
+            ),
+            visualTransformation = PasswordVisualTransformation(),
             shape = RoundedCornerShape(24.dp),
             modifier = Modifier.width(350.dp),
             colors = TextFieldDefaults.colors(
