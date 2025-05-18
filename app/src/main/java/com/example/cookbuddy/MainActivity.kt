@@ -14,6 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.cookbuddy.ui.theme.CookBuddyTheme
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
@@ -22,7 +25,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            landing()
+            val navController = rememberNavController()
+            NavHost(navController = navController, startDestination = "landing_page", builder = {
+                composable("landing_page"){
+                    Landing(navController)
+                }
+                composable("register_page"){
+                    Register(navController)
+                }
+                composable("login_page"){
+                    Login(navController)
+                }
+            } )
         }
     }
 }

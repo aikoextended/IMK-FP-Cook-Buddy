@@ -37,9 +37,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun login(){
+fun Login(navController: NavController){
     var username by remember {
         mutableStateOf("")
     }
@@ -66,7 +67,7 @@ fun login(){
             Image(
                 painter = painterResource(id = R.drawable.back_final),
                 contentDescription = "Back",
-                modifier = Modifier.size(24.dp).width(350.dp).clickable {  }
+                modifier = Modifier.size(24.dp).width(350.dp).clickable {navController.navigate("landing_page")}
             )
             Spacer(
                 modifier = Modifier.height(20.dp)
@@ -185,7 +186,7 @@ fun login(){
             Text(
                 text = "Register!",
                 color = Color(0xFF4F070D),
-                modifier = Modifier.clickable {  },
+                modifier = Modifier.clickable {navController.navigate("register_page")},
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )

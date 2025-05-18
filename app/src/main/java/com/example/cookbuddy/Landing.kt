@@ -26,9 +26,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun landing(){
+fun Landing(navController: NavController){
     Column(
         modifier = Modifier.fillMaxSize().background(Color(0xFF4F070D)),
         verticalArrangement = Arrangement.Center,
@@ -72,7 +73,7 @@ fun landing(){
             modifier = Modifier.height(160.dp)
         )
         Button(
-            onClick = {},
+            onClick = {navController.navigate("register_page")},
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color(0xFF4F070D),
                 containerColor = Color.White
@@ -98,7 +99,7 @@ fun landing(){
             Text(
                 text = "Log in!",
                 color = Color.White,
-                modifier = Modifier.clickable { },
+                modifier = Modifier.clickable {navController.navigate("login_page")},
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
