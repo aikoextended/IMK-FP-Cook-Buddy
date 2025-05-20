@@ -73,7 +73,7 @@ fun Register(navController: NavController){
             Image(
                 painter = painterResource(id = R.drawable.back_final),
                 contentDescription = "Back",
-                modifier = Modifier.size(24.dp).width(350.dp).clickable {navController.navigate("landing_page")}
+                modifier = Modifier.size(24.dp).width(350.dp).clickable {navController.navigate(Screen.Landing.route)}
             )
             Spacer(
                 modifier = Modifier.height(20.dp)
@@ -259,7 +259,7 @@ fun Register(navController: NavController){
             Text(
                 text = "Log in!",
                 color = Color(0xFF4F070D),
-                modifier = Modifier.clickable {navController.navigate("login_page")},
+                modifier = Modifier.clickable {navController.navigate(Screen.Login.route)},
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )

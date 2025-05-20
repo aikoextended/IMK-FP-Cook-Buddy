@@ -73,7 +73,7 @@ fun Landing(navController: NavController){
             modifier = Modifier.height(160.dp)
         )
         Button(
-            onClick = {navController.navigate("register_page")},
+            onClick = {navController.navigate(Screen.Register.route)},
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color(0xFF4F070D),
                 containerColor = Color.White
@@ -99,7 +99,7 @@ fun Landing(navController: NavController){
             Text(
                 text = "Log in!",
                 color = Color.White,
-                modifier = Modifier.clickable {navController.navigate("login_page")},
+                modifier = Modifier.clickable {navController.navigate(Screen.Login.route)},
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
