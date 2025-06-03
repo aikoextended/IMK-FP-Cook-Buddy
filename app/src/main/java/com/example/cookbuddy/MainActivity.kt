@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = Screen.Landing.route, builder = {
+            NavHost(navController = navController, startDestination = Screen.Home.route, builder = {
                 composable(Screen.Landing.route){
                     Landing(navController)
                 }
@@ -35,6 +35,9 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(Screen.Login.route){
                     Login(navController)
+                }
+                composable(Screen.Home.route){
+                    Homepage(navController)
                 }
             } )
         }
