@@ -233,7 +233,7 @@ fun Register(navController: NavController){
             modifier = Modifier.height(48.dp)
         )
         Button(
-            onClick = {},
+            onClick = {navController.navigate(Screen.Main.route)},
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.White,
                 containerColor = Color(0xFF4F070D)

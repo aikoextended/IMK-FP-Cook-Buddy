@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 
 @Composable
-fun Homepage(navController: NavController) {
+fun Homepage() {
     val categories = listOf("Popular", "Western", "Drinks", "Dessert", "Cake", "etc")
     val selectedCategory = remember { mutableStateOf("Popular") }
 
