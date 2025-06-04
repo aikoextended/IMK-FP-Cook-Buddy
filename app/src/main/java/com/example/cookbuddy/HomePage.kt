@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
@@ -24,12 +25,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 
 @Composable
-fun Homepage() {
-    val categories = listOf("Popular", "Western", "Drinks", "Dessert", "Cake", "etc")
-    val selectedCategory = remember { mutableStateOf("Popular") }
+fun Homepage(navController: NavController) {
+    val categories = listOf("All", "Western", "Drinks", "Dessert", "Cake", "etc")
+    val selectedCategory = remember { mutableStateOf("All") }
+    val searchQuery = remember { mutableStateOf("") }
+    var isSearching by remember { mutableStateOf(false) }
 
     val categoryIconMap = mapOf(
-        "Popular" to R.drawable.ic_popular,
+        "All" to R.drawable.ic_popular,
         "Western" to R.drawable.ic_western,
         "Drinks" to R.drawable.ic_drinks,
         "Dessert" to R.drawable.ic_dessert,
@@ -37,9 +40,19 @@ fun Homepage() {
         "etc" to R.drawable.ic_etc
     )
 
-    val filteredRecipes = remember(selectedCategory.value) {
-        allRecipes.filter { it.category == selectedCategory.value || selectedCategory.value == "Popular" && it.category == "Popular" }
+    val filteredRecipes = remember(selectedCategory.value, searchQuery.value) {
+        when {
+            searchQuery.value.isNotEmpty() -> {
+                allRecipes.filter { recipe ->
+                    recipe.title.contains(searchQuery.value, ignoreCase = true) ||
+                            recipe.category.contains(searchQuery.value, ignoreCase = true)
+                }
+            }
+            selectedCategory.value == "All" -> allRecipes
+            else -> allRecipes.filter { it.category == selectedCategory.value }
+        }
     }
+
 
     Column(
         modifier = Modifier
@@ -55,7 +68,11 @@ fun Homepage() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text("Hi, User!", style = MaterialTheme.typography.bodyMedium)
-            Image(painter = painterResource(id = R.drawable.ic_info), contentDescription = "Help", modifier = Modifier.size(32.dp))
+            Image(
+                painter = painterResource(id = R.drawable.ic_info),
+                contentDescription = "Help",
+                modifier = Modifier.size(32.dp)
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -67,46 +84,124 @@ fun Homepage() {
 
         Spacer(modifier = Modifier.height(48.dp))
 
-        Row(
+        // Search Bar
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(56.dp)
                 .background(Color(0xFFF6F1EB), shape = RoundedCornerShape(12.dp))
-                .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
-            Image(painter = painterResource(id = R.drawable.ic_search), contentDescription = "Search", modifier = Modifier.size(24.dp))
-            Spacer(modifier = Modifier.width(8.dp))
-            Text("Search Recipe", color = Color.Gray)
-            Spacer(modifier = Modifier.weight(1f))
-            Image(painter = painterResource(id = R.drawable.ic_mic), contentDescription = "Voice Search", modifier = Modifier.size(24.dp))
-        }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_search),
+                    contentDescription = "Search",
+                    modifier = Modifier.size(24.dp)
+                )
 
-        Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.width(8.dp))
 
-        LazyRow {
-            items(categories) { category ->
-                val isSelected = category == selectedCategory.value
-                val iconRes = categoryIconMap[category] ?: R.drawable.ic_default
-
-                Column(
+                // TextField tanpa border
+                BasicTextField(
+                    value = searchQuery.value,
+                    onValueChange = {
+                        searchQuery.value = it
+                        isSearching = it.isNotEmpty()
+                    },
                     modifier = Modifier
-                        .padding(end = 12.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(if (isSelected) Color(0xFF4C0F0F) else Color(0xFFF6F1EB))
-                        .clickable { selectedCategory.value = category }
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Image(painter = painterResource(id = iconRes), contentDescription = category, modifier = Modifier.size(24.dp))
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(category, color = if (isSelected) Color.White else Color.Black, fontSize = MaterialTheme.typography.bodySmall.fontSize)
+                        .weight(1f)
+                        .padding(vertical = 2.dp), // Penyesuaian kecil agar teks rata tengah
+                    singleLine = true,
+                    textStyle = LocalTextStyle.current.copy(
+                        color = Color.Black,
+                        fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                    ),
+                    decorationBox = { innerTextField ->
+                        if (searchQuery.value.isEmpty()) {
+                            Text(
+                                "Search Recipe",
+                                color = Color.Gray
+                            )
+                        }
+                        innerTextField()
+                    }
+                )
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                if (isSearching) {
+                    IconButton(
+                        onClick = {
+                            searchQuery.value = ""
+                            isSearching = false
+                            selectedCategory.value = "All"
+                        },
+                        modifier = Modifier.size(24.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_close),
+                            contentDescription = "Clear",
+                            modifier = Modifier.size(24.dp),
+                            tint = Color.Gray
+                        )
+                    }
+                } else {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_mic),
+                        contentDescription = "Voice Search",
+                        modifier = Modifier.size(24.dp)
+                    )
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
 
-        Text("${selectedCategory.value} Recipes", style = MaterialTheme.typography.titleMedium)
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Kategori hanya ditampilkan jika tidak sedang mencari
+        if (!isSearching) {
+            LazyRow {
+                items(categories) { category ->
+                    val isSelected = category == selectedCategory.value
+                    val iconRes = categoryIconMap[category] ?: R.drawable.ic_default
+
+                    Column(
+                        modifier = Modifier
+                            .padding(end = 12.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(if (isSelected) Color(0xFF4C0F0F) else Color(0xFFF6F1EB))
+                            .clickable {
+                                selectedCategory.value = category
+                                searchQuery.value = ""
+                            }
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = iconRes),
+                            contentDescription = category,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            category,
+                            color = if (isSelected) Color.White else Color.Black,
+                            fontSize = MaterialTheme.typography.bodySmall.fontSize
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+        }
+
+        Text(
+            if (isSearching) "Search Results" else "${selectedCategory.value} Recipes",
+            style = MaterialTheme.typography.titleMedium
+        )
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -127,10 +222,8 @@ fun Homepage() {
                 )
             }
         }
-
-                Spacer(modifier = Modifier.height(32.dp))
-        }
     }
+}
 
 @Composable
 fun RecipeCard(
