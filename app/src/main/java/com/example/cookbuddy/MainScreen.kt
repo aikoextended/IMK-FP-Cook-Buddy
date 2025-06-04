@@ -4,32 +4,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -52,16 +30,15 @@ fun MainScreen(navController: NavController) {
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             Surface(
-                shadowElevation = 20.dp, // Tambah bayangan di atas navbar
-                shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp), // Sudut atas melengkung
-//                color = Color.White // Background navbar
-            ){
+                shadowElevation = 20.dp,
+                shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+            ) {
                 NavigationBar(
                     containerColor = Color.White
                 ) {
                     navItemList.forEachIndexed { index, navItem ->
                         NavigationBarItem(
-                            selected = selectedIndex == index ,
+                            selected = selectedIndex == index,
                             onClick = {
                                 selectedIndex = index
                             },
@@ -72,15 +49,15 @@ fun MainScreen(navController: NavController) {
                                     modifier = Modifier.size(36.dp)
                                 )
                             },
-                            label =  {
+                            label = {
                                 Text(text = navItem.label)
                             },
                             colors = NavigationBarItemDefaults.colors(
-                                selectedIconColor = Color(0xFF4F070D),    // Warna ikon terpilih
-                                unselectedIconColor = Color.Gray, // Warna ikon tidak terpilih
-                                selectedTextColor = Color(0xFF4F070D),    // Warna teks terpilih
-                                unselectedTextColor = Color.Gray, // Warna teks tidak terpilih
-                                indicatorColor = Color.White  // Warna background item terpilih
+                                selectedIconColor = Color(0xFF4F070D),
+                                unselectedIconColor = Color.Gray,
+                                selectedTextColor = Color(0xFF4F070D),
+                                unselectedTextColor = Color.Gray,
+                                indicatorColor = Color.White
                             )
                         )
                     }
@@ -88,14 +65,22 @@ fun MainScreen(navController: NavController) {
             }
         }
     ) { innerPadding ->
-        ContentScreen(modifier = Modifier.padding(innerPadding), selectedIndex)
+        ContentScreen(
+            modifier = Modifier.padding(innerPadding),
+            selectedIndex = selectedIndex,
+            navController = navController // ✅ navController dikirim ke ContentScreen
+        )
     }
 }
 
 @Composable
-fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int) {
-    when(selectedIndex){
-        0 -> Homepage()
+fun ContentScreen(
+    modifier: Modifier = Modifier,
+    selectedIndex: Int,
+    navController: NavController // ✅ Tambahkan parameter navController
+) {
+    when (selectedIndex) {
+        0 -> Homepage(navController = navController) // ✅ Kirim navController ke Homepage
         1 -> HistoryPage()
         2 -> FavoritePage()
         3 -> ProfilePage()
