@@ -1,6 +1,7 @@
 package com.example.cookbuddy
 
 data class Recipe(
+    val id: Int,
     val title: String,
     val category: String,
     val calories: Int,

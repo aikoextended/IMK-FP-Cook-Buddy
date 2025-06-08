@@ -42,6 +42,13 @@ class MainActivity : ComponentActivity() {
                 composable(Screen.Main.route){
                     MainScreen(navController)
                 }
+                composable("detail/{recipeId}") { backStackEntry ->
+                    val recipeId = backStackEntry.arguments?.getString("recipeId")
+                    val recipe = allRecipes.find { it.id.toString() == recipeId }
+                    if (recipe != null) {
+                        RecipeDetailScreen(recipe)
+                    }
+                }
             } )
         }
     }

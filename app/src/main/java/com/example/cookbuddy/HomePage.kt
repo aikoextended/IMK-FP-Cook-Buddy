@@ -218,7 +218,10 @@ fun Homepage(navController: NavController) {
                     protein = recipe.protein,
                     carbs = recipe.carbs,
                     likes = recipe.likes,
-                    imageRes = recipe.imageRes
+                    imageRes = recipe.imageRes,
+                    onClick = {
+                        navController.navigate("detail/${recipe.id}")
+                    }
                 )
             }
         }
@@ -234,10 +237,11 @@ fun RecipeCard(
     protein: Int,
     carbs: Int,
     likes: Int,
-    imageRes: Int
+    imageRes: Int,
+    onClick: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(
