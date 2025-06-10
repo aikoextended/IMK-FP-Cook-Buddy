@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     val recipeId = backStackEntry.arguments?.getString("recipeId")
                     val recipe = allRecipes.find { it.id.toString() == recipeId }
                     if (recipe != null) {
-                        RecipeDetailScreen(recipe)
+                        RecipeDetailScreen(recipe, navController)
                     }
                 }
             } )

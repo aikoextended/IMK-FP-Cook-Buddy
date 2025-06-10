@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,26 +19,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 
 @Composable
 fun Homepage(navController: NavController) {
-    val categories = listOf("All", "Western", "Drinks", "Dessert", "Cake", "etc")
+    val categories = listOf("All", "Asian", "Western", "Drinks", "Dessert", "etc")
     val selectedCategory = remember { mutableStateOf("All") }
     val searchQuery = remember { mutableStateOf("") }
     var isSearching by remember { mutableStateOf(false) }
 
     val categoryIconMap = mapOf(
-        "All" to R.drawable.ic_popular,
-        "Western" to R.drawable.ic_western,
-        "Drinks" to R.drawable.ic_drinks,
-        "Dessert" to R.drawable.ic_dessert,
-        "Cake" to R.drawable.ic_cake,
-        "etc" to R.drawable.ic_etc
+        "All" to ImageVector.vectorResource(R.drawable.ic_all),
+        "Asian" to ImageVector.vectorResource(R.drawable.ic_asian),
+        "Western" to ImageVector.vectorResource(R.drawable.ic_western),
+        "Drinks" to ImageVector.vectorResource(R.drawable.ic_drinks),
+        "Dessert" to ImageVector.vectorResource(R.drawable.ic_dessert),
+        "etc" to ImageVector.vectorResource(R.drawable.ic_etc)
     )
 
     val filteredRecipes = remember(selectedCategory.value, searchQuery.value) {
@@ -82,7 +85,7 @@ fun Homepage(navController: NavController) {
             style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
         )
 
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         // Search Bar
         Box(
@@ -159,41 +162,44 @@ fun Homepage(navController: NavController) {
         }
 
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         // Kategori hanya ditampilkan jika tidak sedang mencari
         if (!isSearching) {
             LazyRow {
                 items(categories) { category ->
                     val isSelected = category == selectedCategory.value
-                    val iconRes = categoryIconMap[category] ?: R.drawable.ic_default
+                    val icon = categoryIconMap[category] ?: Icons.Default.Info
 
                     Column(
                         modifier = Modifier
-                            .padding(end = 12.dp)
+                            .padding(end = 16.dp)
                             .clip(RoundedCornerShape(12.dp))
                             .background(if (isSelected) Color(0xFF4C0F0F) else Color(0xFFF6F1EB))
                             .clickable {
                                 selectedCategory.value = category
                                 searchQuery.value = ""
                             }
-                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                            .padding(horizontal = 8.dp, vertical = 8.dp)
+                            .width(44.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Image(
-                            painter = painterResource(id = iconRes),
+                        Icon(
+                            imageVector = icon,
                             contentDescription = category,
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(24.dp),
+                            tint = if (isSelected) Color(0xFFF6F1EB) else Color(0xFF6B6B6B)
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             category,
-                            color = if (isSelected) Color.White else Color.Black,
+                            color = if (isSelected) Color(0xFFF6F1EB) else Color(0xFF6B6B6B),
                             fontSize = MaterialTheme.typography.bodySmall.fontSize
                         )
                     }
                 }
             }
+
 
             Spacer(modifier = Modifier.height(24.dp))
         }
@@ -223,6 +229,9 @@ fun Homepage(navController: NavController) {
                         navController.navigate("detail/${recipe.id}")
                     }
                 )
+            }
+            item {
+                Spacer(modifier = Modifier.height(90.dp)) // Atur tinggi sesuai kebutuhan
             }
         }
     }

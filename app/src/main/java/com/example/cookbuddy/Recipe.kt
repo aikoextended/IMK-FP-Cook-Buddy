@@ -9,5 +9,9 @@ data class Recipe(
     val protein: Int,
     val carbs: Int,
     val likes: Int,
-    val imageRes: Int
+    val imageRes: Int,
+    val time: Int,
+    val servings: Int,
+    val ingredients: List<String>,
+    val instructions: List<String>
 )
