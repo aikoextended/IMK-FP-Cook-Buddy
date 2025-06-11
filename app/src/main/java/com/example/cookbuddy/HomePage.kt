@@ -1,5 +1,13 @@
 package com.example.cookbuddy
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.speech.RecognizerIntent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +34,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
+import java.util.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
 
 @Composable
 fun Homepage(navController: NavController) {
@@ -33,6 +44,40 @@ fun Homepage(navController: NavController) {
     val selectedCategory = remember { mutableStateOf("All") }
     val searchQuery = remember { mutableStateOf("") }
     var isSearching by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+
+    // Function to start speech recognition - MOVED HERE
+    val startSpeechRecognition: (ActivityResultLauncher<Intent>) -> Unit = { launcher ->
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+            putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to search recipes")
+        }
+        launcher.launch(intent)
+    }
+
+    // Launcher for speech recognition
+    val speechRecognizerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            val data = result.data
+            val results = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            results?.getOrNull(0)?.let { recognizedText ->
+                searchQuery.value = recognizedText
+                isSearching = recognizedText.isNotEmpty()
+            }
+        }
+    }
+
+    // Permission request launcher
+    val requestPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            startSpeechRecognition(speechRecognizerLauncher)
+        }
+    }
 
     val categoryIconMap = mapOf(
         "All" to ImageVector.vectorResource(R.drawable.ic_all),
@@ -155,7 +200,21 @@ fun Homepage(navController: NavController) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_mic),
                         contentDescription = "Voice Search",
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {
+                                when {
+                                    ContextCompat.checkSelfPermission(
+                                        context,
+                                        Manifest.permission.RECORD_AUDIO
+                                    ) == PackageManager.PERMISSION_GRANTED -> {
+                                        startSpeechRecognition(speechRecognizerLauncher)
+                                    }
+                                    else -> {
+                                        requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                                    }
+                                }
+                            }
                     )
                 }
             }
