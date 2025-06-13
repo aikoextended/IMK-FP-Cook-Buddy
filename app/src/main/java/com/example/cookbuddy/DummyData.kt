@@ -20,8 +20,22 @@ val allRecipes = listOf(
             "Serve chilled."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -44,8 +58,22 @@ val allRecipes = listOf(
             "Stir quickly and season."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -65,8 +93,22 @@ val allRecipes = listOf(
             "Add milk/syrup as desired and stir."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -90,8 +132,22 @@ val allRecipes = listOf(
             "Let cool and serve."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -112,8 +168,22 @@ val allRecipes = listOf(
             "Chill before serving."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -136,8 +206,22 @@ val allRecipes = listOf(
             "Top with egg, meat, green onions, and nori."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -158,8 +242,22 @@ val allRecipes = listOf(
             "Bake at 220°C for 15–20 mins."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -179,8 +277,22 @@ val allRecipes = listOf(
             "Stir in honey."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -203,8 +315,22 @@ val allRecipes = listOf(
             "Chill for 3–4 hours."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -230,8 +356,22 @@ val allRecipes = listOf(
             "Serve hot with cucumber or fried egg on top."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -255,8 +395,22 @@ val allRecipes = listOf(
             "Slice chicken and serve with rice, garnished with sesame and scallions."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -278,8 +432,22 @@ val allRecipes = listOf(
             "Top with egg and sprinkle chili flakes if desired."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     ),
     Recipe(
@@ -301,8 +469,22 @@ val allRecipes = listOf(
             "Serve hot."
         ),
         reviews = listOf(
-            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
-            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
+            Review(
+                userName = "Team 4",
+                avatarRes = R.drawable.avatar1,
+                rating = 5.0,
+                comment = "Great recipe! added some extra sesame salad dressing and it turned out delicious.",
+                reviewImageRes = R.drawable.pic1_review,
+                timeAgo = "just now"
+            ),
+            Review(
+                userName = "Key of Jack Princess",
+                avatarRes = R.drawable.avatar2,
+                rating = 5.0,
+                comment = "Perfect recipe! The instruction were clear and the result was amazing. My family loved it!",
+                reviewImageRes = R.drawable.pic2_review,
+                timeAgo = "1 week ago"
+            )
         )
     )
 )

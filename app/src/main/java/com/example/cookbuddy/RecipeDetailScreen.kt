@@ -162,6 +162,22 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
 
                     Spacer(modifier = Modifier.height(32.dp))
 
+                    // Gizi
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+//                        Text("${recipe.time} mins", fontSize = 13.sp, color = Color(0xFF4F070D))
+//                        Text("${recipe.servings} servings", fontSize = 13.sp, color = Color(0xFF4F070D))
+                        Text("${recipe.calories} Calories", fontSize = MaterialTheme.typography.bodySmall.fontSize)
+                        Text("${recipe.fat} gr Fat", fontSize = MaterialTheme.typography.bodySmall.fontSize)
+                        Text("${recipe.protein} gr Protein", fontSize = MaterialTheme.typography.bodySmall.fontSize)
+                        Text("${recipe.carbs} gr Carbs", fontSize = MaterialTheme.typography.bodySmall.fontSize)
+                    }
+
+                    Spacer(modifier = Modifier.height(32.dp))
+
                     // Ingredients
                     Text("Ingredients", fontWeight = FontWeight.Bold, fontSize = 16.sp)
                     Spacer(modifier = Modifier.height(8.dp))
@@ -199,7 +215,10 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                                         contentAlignment = Alignment.Center,
                                         modifier = Modifier
                                             .size(28.dp)
-                                            .background(color = Color(0xFF4C0F0F), shape = CircleShape)
+                                            .background(
+                                                color = Color(0xFF4C0F0F),
+                                                shape = CircleShape
+                                            )
                                     ) {
                                         Text(
                                             text = "${index + 1}",
@@ -236,6 +255,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                             colors = CardDefaults.cardColors(containerColor = Color.White)
                         ) {
                             Column(modifier = Modifier.padding(16.dp)) {
+                                // Header: Avatar, Username, Rating
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Image(
                                         painter = painterResource(id = review.avatarRes),
@@ -267,11 +287,28 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
 
                                 Spacer(modifier = Modifier.height(12.dp))
 
+                                // Comment
                                 Text(
                                     review.comment,
                                     style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 22.sp)
                                 )
+
+                                Spacer(modifier = Modifier.height(12.dp))
+
+                                // Review Image
+                                Image(
+                                    painter = painterResource(id = review.reviewImageRes),
+                                    contentDescription = "Review Image",
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(150.dp)
+                                        .clip(RoundedCornerShape(8.dp)),
+                                    contentScale = ContentScale.Crop
+                                )
+
                                 Spacer(modifier = Modifier.height(8.dp))
+
+                                // Review Time
                                 Text(review.timeAgo, fontSize = 12.sp, color = Color.Gray)
                             }
                         }
