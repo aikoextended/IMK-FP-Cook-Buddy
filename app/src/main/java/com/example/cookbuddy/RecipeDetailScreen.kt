@@ -1,6 +1,5 @@
 package com.example.cookbuddy
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,13 +19,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -47,7 +43,7 @@ import androidx.navigation.NavController
 @Composable
 fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
-        // Gambar berada di atas, tidak ikut scroll
+        // Gambar di atas
         Image(
             painter = painterResource(id = recipe.imageRes),
             contentDescription = recipe.title,
@@ -58,7 +54,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                 .align(Alignment.TopCenter)
         )
 
-        // Tombol Back dan Favorite di atas gambar
+        // Tombol Back dan Favorite
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -94,7 +90,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
             }
         }
 
-        // Isi konten scrollable di bawah gambar
+        // Isi konten scrollable
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -105,45 +101,62 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
             item {
                 Column(modifier = Modifier.padding(16.dp)) {
 
+                    // Judul dan Tombol
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-//                        verticalAlignment = Alignment.CenterVertically
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        // Judul dan kategori
                         Column {
                             Text(recipe.title, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-
                             Spacer(modifier = Modifier.height(8.dp))
-
                             Text(recipe.category, color = Color.Gray, fontSize = 14.sp)
-
                             Spacer(modifier = Modifier.height(12.dp))
                         }
 
-                        // Tombol Start Cooking
                         Button(
                             onClick = { /* TODO */ },
                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4C0F0F)),
                             shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.height(45.dp).width(145.dp),
+                            modifier = Modifier
+                                .height(45.dp)
+                                .width(145.dp),
                             contentPadding = PaddingValues(horizontal = 4.dp)
                         ) {
-                            Icon(painter = painterResource(id = R.drawable.play), contentDescription = null, tint = Color.White, modifier = Modifier.size(14.dp))
+                            Icon(
+                                painter = painterResource(id = R.drawable.play),
+                                contentDescription = null,
+                                tint = Color.White,
+                                modifier = Modifier.size(14.dp)
+                            )
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Start Cooking", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                            Text(
+                                "Start Cooking",
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 14.sp
+                            )
                         }
                     }
 
-                    // Waktu & porsi
+                    // Waktu & Porsi
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Icon(painter = painterResource(id = R.drawable.time), contentDescription = null, tint = Color(0xFF4F070D), modifier = Modifier.size(16.dp))
+                        Icon(
+                            painter = painterResource(id = R.drawable.time),
+                            contentDescription = null,
+                            tint = Color(0xFF4F070D),
+                            modifier = Modifier.size(16.dp)
+                        )
                         Text("${recipe.time} mins", fontSize = 13.sp, color = Color(0xFF4F070D))
                         Spacer(modifier = Modifier.width(16.dp))
-                        Icon(painter = painterResource(id = R.drawable.servings), contentDescription = null, tint = Color(0xFF4F070D), modifier = Modifier.size(16.dp))
+                        Icon(
+                            painter = painterResource(id = R.drawable.servings),
+                            contentDescription = null,
+                            tint = Color(0xFF4F070D),
+                            modifier = Modifier.size(16.dp)
+                        )
                         Text("${recipe.servings} servings", fontSize = 13.sp, color = Color(0xFF4F070D))
                     }
 
@@ -157,7 +170,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                             text = "• $ingredient",
                             style = MaterialTheme.typography.bodyMedium.copy(
                                 fontSize = 15.sp,
-                                lineHeight = 28.sp // atur tinggi baris sesuai kebutuhan
+                                lineHeight = 28.sp
                             )
                         )
                     }
@@ -167,16 +180,14 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                     // Instructions
                     Column(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
-                    ){
+                    ) {
                         Text("Instructions", fontWeight = FontWeight.Bold, fontSize = 16.sp)
                         recipe.instructions.forEachIndexed { index, instruction ->
                             Card(
                                 shape = RoundedCornerShape(12.dp),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                                 modifier = Modifier.fillMaxWidth(),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color.White
-                                )
+                                colors = CardDefaults.cardColors(containerColor = Color.White)
                             ) {
                                 Row(
                                     modifier = Modifier
@@ -184,7 +195,6 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                                         .fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    // Lingkaran dengan nomor
                                     Box(
                                         contentAlignment = Alignment.Center,
                                         modifier = Modifier
@@ -201,7 +211,6 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
 
                                     Spacer(modifier = Modifier.width(12.dp))
 
-                                    // Teks instruksi
                                     Text(
                                         text = instruction,
                                         style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 22.sp)
@@ -210,9 +219,65 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                             }
                         }
                     }
+
+                    Spacer(modifier = Modifier.height(32.dp))
+
+                    // Reviews
+                    Text("Reviews", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    recipe.reviews.forEach { review ->
+                        Card(
+                            shape = RoundedCornerShape(12.dp),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 12.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color.White)
+                        ) {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Image(
+                                        painter = painterResource(id = review.avatarRes),
+                                        contentDescription = "Avatar",
+                                        modifier = Modifier
+                                            .size(40.dp)
+                                            .clip(CircleShape)
+                                    )
+
+                                    Spacer(modifier = Modifier.width(12.dp))
+
+                                    Column {
+                                        Text(review.userName, fontWeight = FontWeight.Bold, fontSize = 15.sp)
+
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            repeat(review.rating.toInt()) {
+                                                Icon(
+                                                    painter = painterResource(id = R.drawable.ic_star),
+                                                    contentDescription = "Star",
+                                                    tint = Color(0xFFFFD700),
+                                                    modifier = Modifier.size(16.dp)
+                                                )
+                                            }
+                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text("${review.rating}", fontSize = 12.sp, color = Color.Gray)
+                                        }
+                                    }
+                                }
+
+                                Spacer(modifier = Modifier.height(12.dp))
+
+                                Text(
+                                    review.comment,
+                                    style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 22.sp)
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(review.timeAgo, fontSize = 12.sp, color = Color.Gray)
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 }
-

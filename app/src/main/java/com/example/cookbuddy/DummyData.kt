@@ -18,6 +18,10 @@ val allRecipes = listOf(
             "Mix with mayonnaise, mustard, celery, and onion.",
             "Season with salt and pepper.",
             "Serve chilled."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -38,6 +42,10 @@ val allRecipes = listOf(
             "Mix egg yolks and cheese in a bowl.",
             "Combine hot pasta with pancetta and egg mixture off heat.",
             "Stir quickly and season."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -55,6 +63,10 @@ val allRecipes = listOf(
             "Fill a glass with ice.",
             "Pour coffee over ice.",
             "Add milk/syrup as desired and stir."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -76,6 +88,10 @@ val allRecipes = listOf(
             "Pour into a greased baking tin.",
             "Bake at 180°C for 35–40 mins.",
             "Let cool and serve."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -94,6 +110,10 @@ val allRecipes = listOf(
             "Arrange fruits on top.",
             "Brush with glaze.",
             "Chill before serving."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -114,6 +134,10 @@ val allRecipes = listOf(
             "Cook ramen noodles.",
             "Add noodles to bowl, pour broth.",
             "Top with egg, meat, green onions, and nori."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -132,6 +156,10 @@ val allRecipes = listOf(
             "Add cheese and toppings.",
             "Sprinkle oregano.",
             "Bake at 220°C for 15–20 mins."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -149,6 +177,10 @@ val allRecipes = listOf(
             "Heat and froth milk.",
             "Pour milk into matcha.",
             "Stir in honey."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -169,6 +201,10 @@ val allRecipes = listOf(
             "Add mascarpone layer.",
             "Repeat layers, top with cocoa.",
             "Chill for 3–4 hours."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -192,6 +228,10 @@ val allRecipes = listOf(
             "Push to the side and scramble egg in the pan.",
             "Add rice, sauces, salt and pepper. Stir-fry evenly.",
             "Serve hot with cucumber or fried egg on top."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -213,6 +253,10 @@ val allRecipes = listOf(
             "Heat oil in a pan and cook chicken until browned on both sides.",
             "Add the sauce and simmer until thickened and chicken is glazed.",
             "Slice chicken and serve with rice, garnished with sesame and scallions."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -232,6 +276,10 @@ val allRecipes = listOf(
             "Mash avocado with salt, pepper, and lemon juice.",
             "Spread avocado on toast.",
             "Top with egg and sprinkle chili flakes if desired."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     ),
     Recipe(
@@ -251,6 +299,10 @@ val allRecipes = listOf(
             "Add sesame oil and mix well.",
             "Top with egg, chicken/tofu, green onions, and chili flakes.",
             "Serve hot."
+        ),
+        reviews = listOf(
+            Review("Key of Jack Princess", R.drawable.avatar1, 5.0, "Perfect recipe! My family loved it.", "1 week ago"),
+            Review("Foodie Lover", R.drawable.avatar2, 4.5, "Great taste and easy to follow.", "3 days ago")
         )
     )
 )
