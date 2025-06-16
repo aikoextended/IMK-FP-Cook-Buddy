@@ -114,7 +114,9 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                         }
 
                         Button(
-                            onClick = { /* TODO */ },
+                            onClick = {
+                                navController.navigate("step_by_step/${recipe.id}")
+                            },
                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4C0F0F)),
                             shape = RoundedCornerShape(8.dp),
                             modifier = Modifier
@@ -237,7 +239,51 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                                 }
                             }
                         }
+
+
+//                        Text("Instructions", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+//                        recipe.instructions.forEachIndexed { index, instruction ->
+//                            Card(
+//                                shape = RoundedCornerShape(12.dp),
+//                                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+//                                modifier = Modifier.fillMaxWidth(),
+//                                colors = CardDefaults.cardColors(containerColor = Color.White)
+//                            ) {
+//                                Row(
+//                                    modifier = Modifier
+//                                        .padding(16.dp)
+//                                        .fillMaxWidth(),
+//                                    verticalAlignment = Alignment.CenterVertically
+//                                ) {
+//                                    Box(
+//                                        contentAlignment = Alignment.Center,
+//                                        modifier = Modifier
+//                                            .size(28.dp)
+//                                            .background(
+//                                                color = Color(0xFF4C0F0F),
+//                                                shape = CircleShape
+//                                            )
+//                                    ) {
+//                                        Text(
+//                                            text = "${index + 1}",
+//                                            color = Color.White,
+//                                            fontWeight = FontWeight.Bold,
+//                                            fontSize = 14.sp
+//                                        )
+//                                    }
+//
+//                                    Spacer(modifier = Modifier.width(12.dp))
+//
+//                                    Text(
+//                                        text = instruction,
+//                                        style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 22.sp)
+//                                    )
+//                                }
+//                            }
+//                        }
                     }
+
+
 
                     Spacer(modifier = Modifier.height(32.dp))
 
@@ -246,6 +292,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                     Spacer(modifier = Modifier.height(16.dp))
 
                     recipe.reviews.forEach { review ->
+
                         Card(
                             shape = RoundedCornerShape(12.dp),
                             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),

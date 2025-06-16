@@ -19,6 +19,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cookbuddy.ui.theme.CookBuddyTheme
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +51,21 @@ class MainActivity : ComponentActivity() {
                     if (recipe != null) {
                         RecipeDetailScreen(recipe, navController)
                     }
+                }
+                composable(
+                    "step_by_step/{recipeId}",
+                    arguments = listOf(navArgument("recipeId") { type = NavType.IntType })
+                ) { backStackEntry ->
+                    val recipeId = backStackEntry.arguments?.getInt("recipeId") ?: return@composable
+                    val recipe = allRecipes.find { it.id == recipeId } ?: return@composable
+                    StepByStepScreen(recipe = recipe, navController = navController)
+                }
+                composable(
+                    "done_screen/{recipeTitle}",
+                    arguments = listOf(navArgument("recipeTitle") { type = NavType.StringType })
+                ) { backStackEntry ->
+                    val recipeTitle = backStackEntry.arguments?.getString("recipeTitle") ?: ""
+                    DoneScreen(recipeTitle = recipeTitle, navController = navController)
                 }
             } )
         }

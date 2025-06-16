@@ -38,6 +38,9 @@ import java.util.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 
+val com.example.cookbuddy.Recipe.averageRating: Double
+    get() = if (reviews.isNotEmpty()) reviews.map { it.rating }.average() else 0.0
+
 @Composable
 fun Homepage(navController: NavController) {
     val categories = listOf("All", "Asian", "Western", "Drinks", "Dessert", "etc")
@@ -45,6 +48,18 @@ fun Homepage(navController: NavController) {
     val searchQuery = remember { mutableStateOf("") }
     var isSearching by remember { mutableStateOf(false) }
     val context = LocalContext.current
+
+    var isFilterVisible by remember { mutableStateOf(false) }
+    var selectedSortOption by remember { mutableStateOf<String?>(null) } // Awalnya null
+    var tempSelectedSortOption by remember { mutableStateOf<String?>(null) } // Untuk preview sementara
+
+    var selectedMinCalories by remember { mutableStateOf(0) }
+    var selectedMaxCalories by remember { mutableStateOf(Int.MAX_VALUE) }
+
+    var tempMinCalories by remember { mutableStateOf(0) }
+    var tempMaxCalories by remember { mutableStateOf(Int.MAX_VALUE) }
+
+
 
     // Function to start speech recognition - MOVED HERE
     val startSpeechRecognition: (ActivityResultLauncher<Intent>) -> Unit = { launcher ->
@@ -88,8 +103,14 @@ fun Homepage(navController: NavController) {
         "etc" to ImageVector.vectorResource(R.drawable.ic_etc)
     )
 
-    val filteredRecipes = remember(selectedCategory.value, searchQuery.value) {
-        when {
+    val filteredRecipes = remember(
+        selectedCategory.value,
+        searchQuery.value,
+        selectedSortOption,
+        selectedMinCalories,
+        selectedMaxCalories
+    ) {
+        val filtered = when {
             searchQuery.value.isNotEmpty() -> {
                 allRecipes.filter { recipe ->
                     recipe.title.contains(searchQuery.value, ignoreCase = true) ||
@@ -99,8 +120,17 @@ fun Homepage(navController: NavController) {
             selectedCategory.value == "All" -> allRecipes
             else -> allRecipes.filter { it.category == selectedCategory.value }
         }
-    }
 
+        val calorieFiltered = filtered.filter { it.calories in selectedMinCalories..selectedMaxCalories }
+
+        when (selectedSortOption) {
+            "Most liked" -> calorieFiltered.sortedByDescending { it.likes }
+            "Least liked" -> calorieFiltered.sortedBy { it.likes }
+            "Highest rated" -> calorieFiltered.sortedByDescending { it.averageRating }
+            "Lowest rated" -> calorieFiltered.sortedBy { it.averageRating }
+            else -> calorieFiltered
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -132,91 +162,125 @@ fun Homepage(navController: NavController) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Search Bar
-        Box(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp)
-                .background(Color(0xFFF6F1EB), shape = RoundedCornerShape(12.dp))
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .height(56.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxSize()
+            // Search Box
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(56.dp)
+                    .background(Color(0xFFF6F1EB), shape = RoundedCornerShape(15.dp)) // Rounded 15dp
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_search),
-                    contentDescription = "Search",
-                    modifier = Modifier.size(24.dp)
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_search),
+                        contentDescription = "Search",
+                        modifier = Modifier.size(24.dp)
+                    )
 
-                Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
 
-                // TextField tanpa border
-                BasicTextField(
-                    value = searchQuery.value,
-                    onValueChange = {
-                        searchQuery.value = it
-                        isSearching = it.isNotEmpty()
-                    },
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(vertical = 2.dp), // Penyesuaian kecil agar teks rata tengah
-                    singleLine = true,
-                    textStyle = LocalTextStyle.current.copy(
-                        color = Color.Black,
-                        fontSize = MaterialTheme.typography.bodyMedium.fontSize
-                    ),
-                    decorationBox = { innerTextField ->
-                        if (searchQuery.value.isEmpty()) {
-                            Text(
-                                "Search Recipe",
-                                color = Color.Gray
+                    BasicTextField(
+                        value = searchQuery.value,
+                        onValueChange = {
+                            searchQuery.value = it
+                            isSearching = it.isNotEmpty()
+                        },
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(vertical = 2.dp),
+                        singleLine = true,
+                        textStyle = LocalTextStyle.current.copy(
+                            color = Color.Black,
+                            fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                        ),
+                        decorationBox = { innerTextField ->
+                            if (searchQuery.value.isEmpty()) {
+                                Text(
+                                    "Search Recipe",
+                                    color = Color.Gray
+                                )
+                            }
+                            innerTextField()
+                        }
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    if (isSearching) {
+                        IconButton(
+                            onClick = {
+                                searchQuery.value = ""
+                                isSearching = false
+                                selectedCategory.value = "All"
+                            },
+                            modifier = Modifier.size(24.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_close),
+                                contentDescription = "Clear",
+                                modifier = Modifier.size(24.dp),
+                                tint = Color.Gray
                             )
                         }
-                        innerTextField()
-                    }
-                )
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                if (isSearching) {
-                    IconButton(
-                        onClick = {
-                            searchQuery.value = ""
-                            isSearching = false
-                            selectedCategory.value = "All"
-                        },
-                        modifier = Modifier.size(24.dp)
-                    ) {
+                    } else {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_close),
-                            contentDescription = "Clear",
-                            modifier = Modifier.size(24.dp),
-                            tint = Color.Gray
-                        )
-                    }
-                } else {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_mic),
-                        contentDescription = "Voice Search",
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clickable {
-                                when {
-                                    ContextCompat.checkSelfPermission(
-                                        context,
-                                        Manifest.permission.RECORD_AUDIO
-                                    ) == PackageManager.PERMISSION_GRANTED -> {
-                                        startSpeechRecognition(speechRecognizerLauncher)
-                                    }
-                                    else -> {
-                                        requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                            painter = painterResource(id = R.drawable.ic_mic),
+                            contentDescription = "Voice Search",
+                            tint = Color(0xFF4C0F0F),
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clickable {
+                                    when {
+                                        ContextCompat.checkSelfPermission(
+                                            context,
+                                            Manifest.permission.RECORD_AUDIO
+                                        ) == PackageManager.PERMISSION_GRANTED -> {
+                                            startSpeechRecognition(speechRecognizerLauncher)
+                                        }
+                                        else -> {
+                                            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                                        }
                                     }
                                 }
-                            }
-                    )
+                        )
+                    }
                 }
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            // Filter Button (Rectangle Rounded 15dp)
+            Box(
+                modifier = Modifier
+                    .size(56.dp)
+                    .background(
+                        if (selectedSortOption != null) Color(0xFF4C0F0F) else Color(0xFFF6F1EB),
+                        shape = RoundedCornerShape(15.dp)
+                    )
+                    .clickable {
+                        tempSelectedSortOption = selectedSortOption
+                        isFilterVisible = true
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_filter),
+                    contentDescription = "Filter",
+                    modifier = Modifier.size(24.dp),
+                    colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(
+                        if (selectedSortOption != null) Color.White else Color(0xFF4C0F0F)
+                    )
+                )
             }
         }
 
@@ -293,6 +357,29 @@ fun Homepage(navController: NavController) {
                 Spacer(modifier = Modifier.height(90.dp)) // Atur tinggi sesuai kebutuhan
             }
         }
+    }
+
+    if (isFilterVisible) {
+        FilterModal(
+            onClose = { isFilterVisible = false },
+            selectedSortOption = tempSelectedSortOption,
+            onSortChange = { tempSelectedSortOption = it },
+            minCalories = tempMinCalories,
+            maxCalories = tempMaxCalories,
+            onMinCaloriesChange = { tempMinCalories = it },
+            onMaxCaloriesChange = { tempMaxCalories = it },
+            onClear = {
+                tempSelectedSortOption = null
+                tempMinCalories = 0
+                tempMaxCalories = Int.MAX_VALUE
+            },
+            onApply = {
+                selectedSortOption = tempSelectedSortOption
+                selectedMinCalories = tempMinCalories
+                selectedMaxCalories = tempMaxCalories
+                isFilterVisible = false
+            }
+        )
     }
 }
 
