@@ -158,7 +158,7 @@ fun StepByStepScreen(recipe: Recipe, navController: NavController) {
 
             IconButton(
                 onClick = {
-                    navController.navigate("done_screen/${recipe.title}")
+                    navController.navigate("done_screen/${recipe.title}/${recipe.id}")
                 },
                 modifier = Modifier
                     .size(52.dp)

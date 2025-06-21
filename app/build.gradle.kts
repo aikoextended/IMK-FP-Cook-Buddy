@@ -61,4 +61,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("io.coil-kt:coil:2.4.0")           // ← penting untuk ImageRequest
+    implementation("androidx.compose.material3:material3:1.2.1")
+
+
 }

@@ -68,7 +68,7 @@ fun MainScreen(navController: NavController) {
         ContentScreen(
             modifier = Modifier.padding(innerPadding),
             selectedIndex = selectedIndex,
-            navController = navController // ✅ navController dikirim ke ContentScreen
+            navController = navController // ✅ Hapus favoriteRecipes
         )
     }
 }
@@ -77,12 +77,12 @@ fun MainScreen(navController: NavController) {
 fun ContentScreen(
     modifier: Modifier = Modifier,
     selectedIndex: Int,
-    navController: NavController // ✅ Tambahkan parameter navController
+    navController: NavController // ✅ Hapus favoriteRecipes dari parameter
 ) {
     when (selectedIndex) {
-        0 -> Homepage(navController = navController) // ✅ Kirim navController ke Homepage
+        0 -> Homepage(navController = navController)
         1 -> HistoryPage()
-        2 -> FavoritePage()
+        2 -> FavoritePage(navController = navController) // ✅ Panggil tanpa favoriteRecipes
         3 -> ProfilePage()
     }
 }

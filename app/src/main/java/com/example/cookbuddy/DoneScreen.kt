@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun DoneScreen(recipeTitle: String, navController: NavController) {
+fun DoneScreen(recipeTitle: String, recipeId: Int, navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -78,7 +78,7 @@ fun DoneScreen(recipeTitle: String, navController: NavController) {
         // Bottom Button
         Button(
             onClick = {
-                // TODO: Navigate to Write Review
+                navController.navigate("write_review/$recipeTitle/$recipeId")
             },
             modifier = Modifier
                 .align(Alignment.BottomCenter)

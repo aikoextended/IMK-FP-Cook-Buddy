@@ -60,13 +60,39 @@ class MainActivity : ComponentActivity() {
                     val recipe = allRecipes.find { it.id == recipeId } ?: return@composable
                     StepByStepScreen(recipe = recipe, navController = navController)
                 }
+                // tombol done untuk fisnish memasak
                 composable(
-                    "done_screen/{recipeTitle}",
-                    arguments = listOf(navArgument("recipeTitle") { type = NavType.StringType })
+                    "done_screen/{recipeTitle}/{recipeId}",
+                    arguments = listOf(
+                        navArgument("recipeTitle") { type = NavType.StringType },
+                        navArgument("recipeId") { type = NavType.IntType }
+                    )
                 ) { backStackEntry ->
                     val recipeTitle = backStackEntry.arguments?.getString("recipeTitle") ?: ""
-                    DoneScreen(recipeTitle = recipeTitle, navController = navController)
+                    val recipeId = backStackEntry.arguments?.getInt("recipeId") ?: 0
+                    DoneScreen(recipeTitle = recipeTitle, recipeId = recipeId, navController = navController)
                 }
+                // tombol write review ke write review
+                composable(
+                    "write_review/{recipeTitle}/{recipeId}",
+                    arguments = listOf(
+                        navArgument("recipeTitle") { type = NavType.StringType },
+                        navArgument("recipeId") { type = NavType.IntType }
+                    )
+                ) { backStackEntry ->
+                    val recipeTitle = backStackEntry.arguments?.getString("recipeTitle") ?: ""
+                    val recipeId = backStackEntry.arguments?.getInt("recipeId") ?: 0
+                    WriteReviewScreen(recipeTitle = recipeTitle, recipeId = recipeId, navController = navController)
+                }
+                // tombol submit back ke detail resep
+                composable("detail/{recipeId}") { backStackEntry ->
+                    val recipeId = backStackEntry.arguments?.getString("recipeId")
+                    val recipe = allRecipes.find { it.id.toString() == recipeId }
+                    if (recipe != null) {
+                        RecipeDetailScreen(recipe, navController)
+                    }
+                }
+
             } )
         }
     }

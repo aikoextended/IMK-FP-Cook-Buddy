@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -39,9 +40,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+
 
 @Composable
 fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
+    var isFavorite by remember { mutableStateOf(FavoriteManager.isFavorite(recipe)) }
+
+
     Box(modifier = Modifier.fillMaxSize()) {
         // Gambar di atas
         Image(
@@ -77,15 +86,18 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
             }
 
             IconButton(
-                onClick = { /* TODO: Favorite logic */ },
+                onClick = {
+                    FavoriteManager.toggleFavorite(recipe)
+                    isFavorite = FavoriteManager.isFavorite(recipe)
+                },
                 modifier = Modifier
                     .background(Color.White.copy(alpha = 0.7f), shape = CircleShape)
                     .size(36.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
+                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = "Favorite",
-                    tint = Color.Black
+                    tint = if (isFavorite) Color.Red else Color.Black
                 )
             }
         }
@@ -239,51 +251,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                                 }
                             }
                         }
-
-
-//                        Text("Instructions", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-//                        recipe.instructions.forEachIndexed { index, instruction ->
-//                            Card(
-//                                shape = RoundedCornerShape(12.dp),
-//                                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-//                                modifier = Modifier.fillMaxWidth(),
-//                                colors = CardDefaults.cardColors(containerColor = Color.White)
-//                            ) {
-//                                Row(
-//                                    modifier = Modifier
-//                                        .padding(16.dp)
-//                                        .fillMaxWidth(),
-//                                    verticalAlignment = Alignment.CenterVertically
-//                                ) {
-//                                    Box(
-//                                        contentAlignment = Alignment.Center,
-//                                        modifier = Modifier
-//                                            .size(28.dp)
-//                                            .background(
-//                                                color = Color(0xFF4C0F0F),
-//                                                shape = CircleShape
-//                                            )
-//                                    ) {
-//                                        Text(
-//                                            text = "${index + 1}",
-//                                            color = Color.White,
-//                                            fontWeight = FontWeight.Bold,
-//                                            fontSize = 14.sp
-//                                        )
-//                                    }
-//
-//                                    Spacer(modifier = Modifier.width(12.dp))
-//
-//                                    Text(
-//                                        text = instruction,
-//                                        style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 22.sp)
-//                                    )
-//                                }
-//                            }
-//                        }
                     }
-
-
 
                     Spacer(modifier = Modifier.height(32.dp))
 
