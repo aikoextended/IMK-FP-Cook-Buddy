@@ -28,7 +28,7 @@ import androidx.navigation.NavController
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.runtime.*
-
+import com.example.cookbuddy.HistoryManager
 
 @Composable
 fun StepByStepScreen(recipe: Recipe, navController: NavController) {
@@ -158,6 +158,7 @@ fun StepByStepScreen(recipe: Recipe, navController: NavController) {
 
             IconButton(
                 onClick = {
+                    HistoryManager.addOrUpdate(recipe, isFinished = true)
                     navController.navigate("done_screen/${recipe.title}/${recipe.id}")
                 },
                 modifier = Modifier

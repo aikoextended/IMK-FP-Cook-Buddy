@@ -44,6 +44,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.example.cookbuddy.HistoryManager
 
 
 @Composable
@@ -127,6 +128,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
 
                         Button(
                             onClick = {
+                                HistoryManager.addOrUpdate(recipe, isFinished = false)
                                 navController.navigate("step_by_step/${recipe.id}")
                             },
                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4C0F0F)),
