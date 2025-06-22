@@ -28,7 +28,7 @@ fun HistoryPage(modifier: Modifier = Modifier) {
             .background(Color.White)
             .padding(horizontal = 16.dp)
     ) {
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(36.dp))
 
         // Title "History" in the center
         Box(
@@ -38,7 +38,7 @@ fun HistoryPage(modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "History",
-                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
+                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold)
             )
         }
 

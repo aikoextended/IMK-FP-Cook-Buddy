@@ -396,7 +396,7 @@ val allRecipes = listOf(
 
     Recipe(
         id = 13,
-        title = "Instant Cup Noodles Remix",
+        title = "Instant Cup Noodles",
         category = "etc",
         calories = 350,
         fat = 14,

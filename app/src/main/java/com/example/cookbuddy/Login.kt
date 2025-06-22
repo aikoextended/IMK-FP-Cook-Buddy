@@ -47,8 +47,8 @@ fun Login(navController: NavController){
     var password by remember {
         mutableStateOf("")
     }
-    val icon_user: Painter = painterResource(id = R.drawable.icon_user)
-    val icon_password: Painter = painterResource(id = R.drawable.icon_password)
+    val icon_user: Painter = painterResource(id = R.drawable.ic_user)
+    val icon_password: Painter = painterResource(id = R.drawable.ic_password)
     Column(
         modifier = Modifier.fillMaxSize().background(Color(0xFFFFFFFF)),
         verticalArrangement = Arrangement.Top,

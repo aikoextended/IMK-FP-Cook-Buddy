@@ -43,7 +43,7 @@ fun FavoritePage(navController: NavController, modifier: Modifier = Modifier) {
             .background(Color.White)
             .padding(horizontal = 16.dp)
     ) {
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(36.dp))
 
          // Title "Favorite" di Tengah
          Box(
@@ -53,44 +53,48 @@ fun FavoritePage(navController: NavController, modifier: Modifier = Modifier) {
          ) {
              Text(
                  text = "Favorite",
-                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
+                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold)
              )
          }
 
          Spacer(modifier = Modifier.height(24.dp))
 
         // Search Bar
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-                .background(Color(0xFFF6F1EB), shape = RoundedCornerShape(15.dp))
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_search),
-                    contentDescription = "Search",
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                BasicTextField(
-                    value = searchQuery.value,
-                    onValueChange = { searchQuery.value = it },
-                    singleLine = true,
-                    textStyle = LocalTextStyle.current.copy(color = Color.Black),
-                    modifier = Modifier.fillMaxWidth(),
-                    decorationBox = { innerTextField ->
-                        if (searchQuery.value.isEmpty()) {
-                            Text("Search Favorite", color = Color.Gray)
-                        }
-                        innerTextField()
-                    }
-                )
-            }
-        }
+         Box(
+             modifier = Modifier
+                 .fillMaxWidth()
+                 .height(56.dp)
+                 .background(Color(0xFFF6F1EB), shape = RoundedCornerShape(15.dp)) // Rounded 15dp
+                 .padding(horizontal = 16.dp)
+         ) {
+             Row(
+                 modifier = Modifier
+                     .fillMaxSize(), // Isi seluruh tinggi kotak
+                 verticalAlignment = Alignment.CenterVertically // Ini yang bikin pas di tengah
+             ) {
+                 Image(
+                     painter = painterResource(id = R.drawable.ic_search),
+                     contentDescription = "Search",
+                     modifier = Modifier.size(24.dp)
+                 )
+                 Spacer(modifier = Modifier.width(8.dp))
+                 BasicTextField(
+                     value = searchQuery.value,
+                     onValueChange = { searchQuery.value = it },
+                     singleLine = true,
+                     textStyle = LocalTextStyle.current.copy(color = Color.Black),
+                     modifier = Modifier.fillMaxWidth(),
+                     decorationBox = { innerTextField ->
+                         if (searchQuery.value.isEmpty()) {
+                             Text("Search Favorite", color = Color.Gray)
+                         }
+                         innerTextField()
+                     }
+                 )
+             }
+         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+         Spacer(modifier = Modifier.height(16.dp))
 
         // Category
         val categories = listOf("All", "Asian", "Western", "Drinks", "Dessert", "Etc")

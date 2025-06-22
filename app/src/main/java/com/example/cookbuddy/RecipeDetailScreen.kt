@@ -60,7 +60,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(210.dp)
+                .height(280.dp) // gambar diperbesar
                 .align(Alignment.TopCenter)
         )
 
@@ -107,7 +107,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 190.dp, bottom = 24.dp)
+                .padding(top = 280.dp, bottom = 24.dp) // disesuaikan dengan tinggi gambar (agak lebih kecil)
                 .background(Color.White)
                 .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
         ) {
