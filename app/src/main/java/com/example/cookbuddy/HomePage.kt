@@ -42,7 +42,7 @@ val com.example.cookbuddy.Recipe.averageRating: Double
     get() = if (reviews.isNotEmpty()) reviews.map { it.rating }.average() else 0.0
 
 @Composable
-fun Homepage(navController: NavController) {
+fun Homepage(navController: NavController,  onFilteringStateChange: (Boolean) -> Unit) {
     val categories = listOf("All", "Asian", "Western", "Drinks", "Dessert", "etc")
     val selectedCategory = remember { mutableStateOf("All") }
     val searchQuery = remember { mutableStateOf("") }
@@ -270,6 +270,7 @@ fun Homepage(navController: NavController) {
                     .clickable {
                         tempSelectedSortOption = selectedSortOption
                         isFilterVisible = true
+                        onFilteringStateChange(true) // Sembunyikan navbar
                     },
                 contentAlignment = Alignment.Center
             ) {
@@ -361,7 +362,10 @@ fun Homepage(navController: NavController) {
 
     if (isFilterVisible) {
         FilterModal(
-            onClose = { isFilterVisible = false },
+            onClose = {
+                isFilterVisible = false
+                onFilteringStateChange(false)
+            },
             selectedSortOption = tempSelectedSortOption,
             onSortChange = { tempSelectedSortOption = it },
             minCalories = tempMinCalories,
@@ -378,6 +382,7 @@ fun Homepage(navController: NavController) {
                 selectedMinCalories = tempMinCalories
                 selectedMaxCalories = tempMaxCalories
                 isFilterVisible = false
+                onFilteringStateChange(false)
             }
         )
     }

@@ -152,6 +152,7 @@ fun WriteReviewScreen(recipeTitle: String, recipeId: Int, navController: NavCont
         // Submit Button
         Button(
             onClick = {
+                HistoryManager.markAsReviewed(recipeId)
                 navController.navigate("detail/$recipeId") {
                     popUpTo(Screen.Main.route) { inclusive = false }
                     launchSingleTop = true

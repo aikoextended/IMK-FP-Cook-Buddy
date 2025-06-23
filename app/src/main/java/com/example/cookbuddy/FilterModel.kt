@@ -146,7 +146,7 @@ fun FilterModal(
             ) {
                 Text("Apply", color = Color.White)
             }
-            Spacer(modifier = Modifier.height(90.dp))
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }

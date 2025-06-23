@@ -22,44 +22,39 @@ fun MainScreen(navController: NavController) {
         NavItem("Profile", R.drawable.profile)
     )
 
-    var selectedIndex by remember {
-        mutableIntStateOf(0)
-    }
+    var selectedIndex by remember { mutableIntStateOf(0) }
+    var isFiltering by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            Surface(
-                shadowElevation = 20.dp,
-                shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-            ) {
-                NavigationBar(
-                    containerColor = Color.White
+            if (!isFiltering) {
+                Surface(
+                    shadowElevation = 20.dp,
+                    shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
                 ) {
-                    navItemList.forEachIndexed { index, navItem ->
-                        NavigationBarItem(
-                            selected = selectedIndex == index,
-                            onClick = {
-                                selectedIndex = index
-                            },
-                            icon = {
-                                Icon(
-                                    painter = painterResource(id = navItem.iconRes),
-                                    contentDescription = navItem.label,
-                                    modifier = Modifier.size(36.dp)
+                    NavigationBar(containerColor = Color.White) {
+                        navItemList.forEachIndexed { index, navItem ->
+                            NavigationBarItem(
+                                selected = selectedIndex == index,
+                                onClick = { selectedIndex = index },
+                                icon = {
+                                    Icon(
+                                        painter = painterResource(id = navItem.iconRes),
+                                        contentDescription = navItem.label,
+                                        modifier = Modifier.size(36.dp)
+                                    )
+                                },
+                                label = { Text(text = navItem.label) },
+                                colors = NavigationBarItemDefaults.colors(
+                                    selectedIconColor = Color(0xFF4F070D),
+                                    unselectedIconColor = Color.Gray,
+                                    selectedTextColor = Color(0xFF4F070D),
+                                    unselectedTextColor = Color.Gray,
+                                    indicatorColor = Color.White
                                 )
-                            },
-                            label = {
-                                Text(text = navItem.label)
-                            },
-                            colors = NavigationBarItemDefaults.colors(
-                                selectedIconColor = Color(0xFF4F070D),
-                                unselectedIconColor = Color.Gray,
-                                selectedTextColor = Color(0xFF4F070D),
-                                unselectedTextColor = Color.Gray,
-                                indicatorColor = Color.White
                             )
-                        )
+                        }
                     }
                 }
             }
@@ -68,21 +63,27 @@ fun MainScreen(navController: NavController) {
         ContentScreen(
             modifier = Modifier.padding(innerPadding),
             selectedIndex = selectedIndex,
-            navController = navController // ✅ Hapus favoriteRecipes
+            navController = navController,
+            onFilteringStateChange = { isFiltering = it }
         )
     }
 }
+
 
 @Composable
 fun ContentScreen(
     modifier: Modifier = Modifier,
     selectedIndex: Int,
-    navController: NavController // ✅ Hapus favoriteRecipes dari parameter
+    navController: NavController,
+    onFilteringStateChange: (Boolean) -> Unit
 ) {
     when (selectedIndex) {
-        0 -> Homepage(navController = navController)
-        1 -> HistoryPage()
-        2 -> FavoritePage(navController = navController) // ✅ Panggil tanpa favoriteRecipes
+        0 -> Homepage(
+            navController = navController,
+            onFilteringStateChange = onFilteringStateChange
+        )
+        1 -> HistoryPage(navController = navController)
+        2 -> FavoritePage(navController = navController)
         3 -> ProfilePage()
     }
 }

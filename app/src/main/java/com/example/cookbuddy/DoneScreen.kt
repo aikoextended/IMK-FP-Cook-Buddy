@@ -33,7 +33,7 @@ fun DoneScreen(recipeTitle: String, recipeId: Int, navController: NavController)
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
-                onClick = { navController.popBackStack() },
+                onClick = { navController.navigate(Screen.Main.route) },
                 modifier = Modifier
                     .background(Color.White.copy(alpha = 0.7f), shape = CircleShape)
                     .size(36.dp)

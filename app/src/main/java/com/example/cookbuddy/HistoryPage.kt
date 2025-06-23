@@ -2,6 +2,7 @@ package com.example.cookbuddy
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -17,9 +18,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun HistoryPage(modifier: Modifier = Modifier) {
+fun HistoryPage(modifier: Modifier = Modifier, navController: NavController) {
     val history = HistoryManager.historyList
 
     Column(
@@ -45,18 +47,35 @@ fun HistoryPage(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(24.dp))
 
         history.forEach { recipe ->
-            HistoryCard(recipe = recipe)
+            HistoryCard(recipe = recipe, onClick = {
+                when (recipe.status) {
+                    RecipeStatus.ONGOING -> {
+                        val fullRecipe = allRecipes.find { it.id == recipe.id }
+                        if (fullRecipe != null) {
+                            navController.navigate("step_by_step/${fullRecipe.id}")
+                        }
+                    }
+                    RecipeStatus.FINISHED_NOT_REVIEWED -> {
+                        navController.navigate("write_review/${recipe.title}/${recipe.id}")
+                    }
+                    RecipeStatus.FINISHED_REVIEWED -> {
+                        navController.navigate("detail/${recipe.id}")
+                    }
+                }
+            })
             Spacer(modifier = Modifier.height(12.dp))
         }
     }
 }
 
 @Composable
-fun HistoryCard(recipe: RecipeHistory) {
+fun HistoryCard(recipe: RecipeHistory, onClick: () -> Unit) {
     Surface(
         shape = RoundedCornerShape(16.dp),
         shadowElevation = 6.dp,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() },
         color = Color.White
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
@@ -94,7 +113,7 @@ fun HistoryCard(recipe: RecipeHistory) {
             when (recipe.status) {
                 RecipeStatus.ONGOING -> {
                     Text(
-                        text = "On going",
+                        text = "On Going",
                         color = Color(0xFF8B0000),
                         fontWeight = FontWeight.SemiBold
                     )
@@ -115,10 +134,20 @@ fun HistoryCard(recipe: RecipeHistory) {
                     }
                 }
                 RecipeStatus.FINISHED_NOT_REVIEWED -> {
-                    Text(
-                        text = "Finished",
-                        color = Color.Gray
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Finished",
+                            color = Color.Gray
+                        )
+                        Text(
+                            text = "Not Reviewed",
+                            color = Color(0xFF8B0000),
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
                 }
             }
         }
