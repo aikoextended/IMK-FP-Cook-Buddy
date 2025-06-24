@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "771574535292",
+    "project_id": "cookbuddy-d1aa5",
+    "storage_bucket": "cookbuddy-d1aa5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771574535292:android:8dbd4d5fcd35785c1165f9",
+        "android_client_info": {
+          "package_name": "com.example.cookbuddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQKHTogs8ZH3Xo5OnyFirVFMeciG6Fk-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
