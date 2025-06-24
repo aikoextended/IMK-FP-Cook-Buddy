@@ -68,7 +68,7 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 24.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 32.dp)
                 .align(Alignment.TopCenter),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -181,15 +181,12 @@ fun RecipeDetailScreen(recipe: Recipe, navController: NavController) {
                     // Gizi
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-//                        Text("${recipe.time} mins", fontSize = 13.sp, color = Color(0xFF4F070D))
-//                        Text("${recipe.servings} servings", fontSize = 13.sp, color = Color(0xFF4F070D))
-                        Text("${recipe.calories} Calories", fontSize = MaterialTheme.typography.bodySmall.fontSize)
-                        Text("${recipe.fat} gr Fat", fontSize = MaterialTheme.typography.bodySmall.fontSize)
-                        Text("${recipe.protein} gr Protein", fontSize = MaterialTheme.typography.bodySmall.fontSize)
-                        Text("${recipe.carbs} gr Carbs", fontSize = MaterialTheme.typography.bodySmall.fontSize)
+                        NutritionItem(value = "${recipe.calories}", label = "Calories")
+                        NutritionItem(value = "${recipe.fat}gr", label = "Fat")
+                        NutritionItem(value = "${recipe.protein}gr", label = "Protein")
+                        NutritionItem(value = "${recipe.carbs}gr", label = "Carbs")
                     }
 
                     Spacer(modifier = Modifier.height(32.dp))

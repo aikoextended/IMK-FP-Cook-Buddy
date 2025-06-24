@@ -29,7 +29,7 @@ fun DoneScreen(recipeTitle: String, recipeId: Int, navController: NavController)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, top = 24.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 32.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
@@ -91,7 +91,7 @@ fun DoneScreen(recipeTitle: String, recipeId: Int, navController: NavController)
                 contentColor = Color(0xFF4C0F0F)
             )
         ) {
-            Text("Write Review", fontWeight = FontWeight.Bold)
+            Text("Write Review", fontWeight = FontWeight.Bold, fontSize = 18.sp)
         }
     }
 }

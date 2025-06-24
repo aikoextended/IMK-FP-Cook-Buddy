@@ -43,7 +43,7 @@ fun ProfilePage(modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "My Profile",
-                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold)
+                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold, fontSize = 24.sp)
             )
         }
 
@@ -71,7 +71,7 @@ fun ProfilePage(modifier: Modifier = Modifier) {
             )
         }
 
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         ProfileSectionTitle("Account")
         ProfileItem(iconId = R.drawable.ic_user, text = "Username")
@@ -101,15 +101,17 @@ fun ProfileItem(
     text: String,
     isLogout: Boolean = false
 ) {
-
     val leftColor = if (isLogout) Color(0xFFFFF4EC) else Color(0xFFFFF4EC)
     val rightColor = if (isLogout) Color(0xFFFFF4EC) else Color(0xFFFFF4EC)
+    val iconColor = if (isLogout) Color(0xFF4C0F0F) else Color.Black
+    val textColor = if (isLogout) Color(0xFF4C0F0F) else Color.Black
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp)
-            .clickable { },
+            .padding(vertical = 2.dp)
+            .clickable { }
+            .height(48.dp),
         shape = RoundedCornerShape(12.dp)
     ) {
         Row(
@@ -128,14 +130,15 @@ fun ProfileItem(
                 Icon(
                     painter = painterResource(id = iconId),
                     contentDescription = text,
-                    tint = Color.Black,
+                    tint = iconColor, // Warna ikon
                     modifier = Modifier.size(24.dp)
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 Text(
                     text = text,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = textColor // Warna teks
                 )
             }
             if (!isLogout) {
@@ -149,6 +152,7 @@ fun ProfileItem(
         }
     }
 }
+
 
 @Composable
 fun ProfileSectionTitle(title: String) {

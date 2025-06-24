@@ -53,7 +53,7 @@ fun FavoritePage(navController: NavController, modifier: Modifier = Modifier) {
          ) {
              Text(
                  text = "Favorite",
-                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold)
+                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold, fontSize = 24.sp)
              )
          }
 
@@ -180,14 +180,9 @@ fun RecipeCard(recipe: Recipe, navController: NavController) {
                         .align(Alignment.BottomStart)
                         .padding(12.dp)
                 ) {
-                    Text(
-                        recipe.title,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Text(recipe.category, color = Color.White)
+                    Text(recipe.title, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White)
+                    Spacer(Modifier.height(4.dp))
+                    Text(recipe.category, fontWeight = FontWeight.Light, fontSize = 14.sp, color = Color.White)
                 }
             }
 
@@ -196,10 +191,10 @@ fun RecipeCard(recipe: Recipe, navController: NavController) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text("${recipe.calories} Cal", fontSize = MaterialTheme.typography.bodySmall.fontSize)
-                    Text("${recipe.fat}g Fat", fontSize = MaterialTheme.typography.bodySmall.fontSize)
-                    Text("${recipe.protein}g Protein", fontSize = MaterialTheme.typography.bodySmall.fontSize)
-                    Text("${recipe.carbs}g Carbs", fontSize = MaterialTheme.typography.bodySmall.fontSize)
+                    NutritionItem(value = "${recipe.calories}", label = "Calories")
+                    NutritionItem(value = "${recipe.fat}gr", label = "Fat")
+                    NutritionItem(value = "${recipe.protein}gr", label = "Protein")
+                    NutritionItem(value = "${recipe.carbs}gr", label = "Carbs")
                 }
             }
         }

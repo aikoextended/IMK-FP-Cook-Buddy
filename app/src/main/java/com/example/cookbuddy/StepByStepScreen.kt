@@ -40,7 +40,7 @@ fun StepByStepScreen(recipe: Recipe, navController: NavController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 24.dp, bottom = 8.dp),
+                    .padding(start = 16.dp, end = 16.dp, top = 32.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(

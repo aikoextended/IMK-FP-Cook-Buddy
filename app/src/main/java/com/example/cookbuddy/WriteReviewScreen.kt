@@ -35,7 +35,7 @@ fun WriteReviewScreen(recipeTitle: String, recipeId: Int, navController: NavCont
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, top = 24.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 32.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
@@ -82,7 +82,7 @@ fun WriteReviewScreen(recipeTitle: String, recipeId: Int, navController: NavCont
                     Icon(
                         painter = painterResource(id = R.drawable.ic_star),
                         contentDescription = "Star $i",
-                        tint = if (i <= selectedRating) Color.Yellow else Color.Gray,
+                        tint = if (i <= selectedRating) Color(0xFFFACC15) else Color.Gray,
                         modifier = Modifier
                             .size(40.dp)
                             .padding(4.dp)
@@ -169,7 +169,7 @@ fun WriteReviewScreen(recipeTitle: String, recipeId: Int, navController: NavCont
                 contentColor = Color.White
             )
         ) {
-            Text("Submit", fontWeight = FontWeight.Bold)
+            Text("Submit", fontWeight = FontWeight.Bold, fontSize = 18.sp)
         }
     }
 }

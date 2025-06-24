@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import java.util.*
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 
 val com.example.cookbuddy.Recipe.averageRating: Double
@@ -446,8 +447,9 @@ fun RecipeCard(
                         .align(Alignment.BottomStart)
                         .padding(12.dp)
                 ) {
-                    Text(title, fontWeight = FontWeight.Bold, color = Color.White)
-                    Text(category, color = Color.White)
+                    Text(title, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White)
+                    Spacer(Modifier.height(4.dp))
+                    Text(category, fontWeight = FontWeight.Light, fontSize = 14.sp, color = Color.White)
                 }
 
                 // Badge jumlah like
@@ -481,12 +483,31 @@ fun RecipeCard(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text("$calories Calories", fontSize = MaterialTheme.typography.bodySmall.fontSize)
-                    Text("${fat}gr Fat", fontSize = MaterialTheme.typography.bodySmall.fontSize)
-                    Text("${protein}gr Protein", fontSize = MaterialTheme.typography.bodySmall.fontSize)
-                    Text("${carbs}gr Carbs", fontSize = MaterialTheme.typography.bodySmall.fontSize)
+                    NutritionItem(value = "$calories", label = "Calories")
+                    NutritionItem(value = "${fat}gr", label = "Fat")
+                    NutritionItem(value = "${protein}gr", label = "Protein")
+                    NutritionItem(value = "${carbs}gr", label = "Carbs")
                 }
             }
         }
+    }
+}
+
+@Composable
+fun NutritionItem(value: String, label: String) {
+    Row(
+        verticalAlignment = Alignment.Bottom
+    ) {
+        Text(
+            text = value,
+            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(Modifier.width(4.dp))
+        Text(
+            text = label,
+            fontSize = MaterialTheme.typography.bodySmall.fontSize,
+            color = Color.Gray
+        )
     }
 }
