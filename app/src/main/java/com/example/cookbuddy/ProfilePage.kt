@@ -55,7 +55,7 @@ fun ProfilePage(modifier: Modifier = Modifier) {
                 painter = painterResource(id = R.drawable.avatar1),
                 contentDescription = "Profile Picture",
                 modifier = Modifier
-                    .size(120.dp)
+                    .size(85.dp)
                     .clip(CircleShape),
                 contentScale = ContentScale.Crop
             )
@@ -67,20 +67,20 @@ fun ProfilePage(modifier: Modifier = Modifier) {
             )
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(26.dp))
 
         ProfileSectionTitle("Account")
         ProfileItem(iconId = R.drawable.ic_user, text = "Username")
         ProfileItem(iconId = R.drawable.ic_mail, text = "E-mail")
         ProfileItem(iconId = R.drawable.ic_password, text = "Password")
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(18.dp))
 
         ProfileSectionTitle("Display")
         ProfileItem(iconId = R.drawable.ic_language, text = "Language")
         ProfileItem(iconId = R.drawable.ic_theme, text = "Theme")
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(18.dp))
 
         ProfileSectionTitle("Other")
         ProfileItem(iconId = R.drawable.ic_logout, text = "Log Out", isLogout = true)
