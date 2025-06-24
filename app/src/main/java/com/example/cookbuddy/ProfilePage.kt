@@ -71,20 +71,20 @@ fun ProfilePage(modifier: Modifier = Modifier) {
             )
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(28.dp))
 
         ProfileSectionTitle("Account")
         ProfileItem(iconId = R.drawable.ic_user, text = "Username")
         ProfileItem(iconId = R.drawable.ic_mail, text = "E-mail")
         ProfileItem(iconId = R.drawable.ic_password, text = "Password")
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         ProfileSectionTitle("Display")
         ProfileItem(iconId = R.drawable.ic_language, text = "Language")
         ProfileItem(iconId = R.drawable.ic_theme, text = "Theme")
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         ProfileSectionTitle("Other")
         ProfileItem(iconId = R.drawable.ic_logout, text = "Log Out", isLogout = true)
