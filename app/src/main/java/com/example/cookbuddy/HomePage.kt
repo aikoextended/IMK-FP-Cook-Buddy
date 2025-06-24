@@ -297,7 +297,7 @@ fun Homepage(navController: NavController,  onFilteringStateChange: (Boolean) ->
 
                     Column(
                         modifier = Modifier
-                            .padding(end = 16.dp)
+                            .padding(end = 12.dp)
                             .clip(RoundedCornerShape(12.dp))
                             .background(if (isSelected) Color(0xFF4C0F0F) else Color(0xFFF6F1EB))
                             .clickable {
@@ -305,7 +305,7 @@ fun Homepage(navController: NavController,  onFilteringStateChange: (Boolean) ->
                                 searchQuery.value = ""
                             }
                             .padding(horizontal = 8.dp, vertical = 8.dp)
-                            .width(44.dp),
+                            .width(50.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Icon(
