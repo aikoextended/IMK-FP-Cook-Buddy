@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -20,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.verticalScroll
 
 @Composable
 fun ProfilePage(modifier: Modifier = Modifier) {
@@ -28,7 +30,9 @@ fun ProfilePage(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(Color.White)
             .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState()) 
     ) {
+        // Add some padding at the top
         Spacer(modifier = Modifier.height(36.dp))
 
         // Title "My Profile" in the center
@@ -55,7 +59,7 @@ fun ProfilePage(modifier: Modifier = Modifier) {
                 painter = painterResource(id = R.drawable.avatar1),
                 contentDescription = "Profile Picture",
                 modifier = Modifier
-                    .size(85.dp)
+                    .size(100.dp)
                     .clip(CircleShape),
                 contentScale = ContentScale.Crop
             )
@@ -67,23 +71,26 @@ fun ProfilePage(modifier: Modifier = Modifier) {
             )
         }
 
-        Spacer(modifier = Modifier.height(26.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         ProfileSectionTitle("Account")
         ProfileItem(iconId = R.drawable.ic_user, text = "Username")
         ProfileItem(iconId = R.drawable.ic_mail, text = "E-mail")
         ProfileItem(iconId = R.drawable.ic_password, text = "Password")
 
-        Spacer(modifier = Modifier.height(18.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         ProfileSectionTitle("Display")
         ProfileItem(iconId = R.drawable.ic_language, text = "Language")
         ProfileItem(iconId = R.drawable.ic_theme, text = "Theme")
 
-        Spacer(modifier = Modifier.height(18.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         ProfileSectionTitle("Other")
         ProfileItem(iconId = R.drawable.ic_logout, text = "Log Out", isLogout = true)
+
+        
+        Spacer(modifier = Modifier.height(80.dp)) 
     }
 }
 
@@ -94,8 +101,7 @@ fun ProfileItem(
     text: String,
     isLogout: Boolean = false
 ) {
-//    val leftColor = if (isLogout) Color(0xFFFBEAEA) else Color(0xFFFFF4EC)
-//    val rightColor = if (isLogout) Color(0xFFFBEAEA) else Color(0xFFF4EDF4)
+
     val leftColor = if (isLogout) Color(0xFFFFF4EC) else Color(0xFFFFF4EC)
     val rightColor = if (isLogout) Color(0xFFFFF4EC) else Color(0xFFFFF4EC)
 
