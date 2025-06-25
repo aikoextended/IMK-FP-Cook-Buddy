@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")  
 }
-
 android {
     namespace = "com.example.cookbuddy"
     compileSdk = 35
@@ -60,8 +60,10 @@ dependencies {
     val nav_version = "2.9.0"
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation("io.coil-kt:coil:2.4.0")           // ← penting untuk ImageRequest
+    implementation("io.coil-kt:coil:2.4.0")
     implementation("androidx.compose.material3:material3:1.2.1")
-
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
 
 }
